@@ -20,10 +20,10 @@ public class WordCount {
 		public void map(LongWritable key, Text value, OutputCollector<Text, Text> output, Reporter reporter)
 				throws IOException {
 			String line = value.toString();
-			StringTokenizer tokenizer = new StringTokenizer(line);
+			StringTokenizer tokenizer = new StringTokenizer(line, "“”\"[ .,;:!?-(){]");
 			while (tokenizer.hasMoreTokens()) {
 				String my_word = tokenizer.nextToken();
-				word.set(my_word);
+				word.set(my_word.toLowerCase());
 				String output_size = "";
 				for (int i = 0; i < my_word.length(); i++) {
 					if (my_word.charAt(i) == 'a' || my_word.charAt(i) == 'e' || my_word.charAt(i) == 'i'
